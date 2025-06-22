@@ -3,21 +3,18 @@ import pyttsx3
 import datetime
 import math
 import wikipedia
-
-# Initialize recognizer and text-to-speech engine
+# Basic-Chatbot
 recognizer = sr.Recognizer()
 tts = pyttsx3.init()
 
 def speak(text):
-    """Convert text to speech"""
     print(f"Bot: {text}")
     tts.say(text)
     tts.runAndWait()
 
 def listen():
-    """Capture voice input"""
     with sr.Microphone() as source:
-        print("🎙️ Speak now...")
+        print("Speak now...")
         recognizer.adjust_for_ambient_noise(source)
         audio = recognizer.listen(source)
 
@@ -58,14 +55,12 @@ def search_wikipedia(query):
         speak("Sorry, I couldn't find information on that.")
 
 def chatbot_reply(message):
-    """Advanced chatbot logic"""
     if message is None:
         return
-
     if "hello" in message or "hi" in message:
-        speak("Hello Naufal! How can I assist you today?")
+        speak("Hello! How can I assist you today?")
     elif "how are you" in message:
-        speak("I'm functioning perfectly. Thanks for asking!")
+        speak("I'm fine. Thanks for asking!")
     elif "your name" in message:
         speak("I'm VoiceBot, your personal voice assistant.")
     elif "time" in message:
@@ -73,7 +68,7 @@ def chatbot_reply(message):
     elif "date" in message:
         tell_date()
     elif "stop" in message or "exit" in message or "goodbye" in message:
-        speak("Goodbye Naufal, have a wonderful day!")
+        speak("Goodbye, have a wonderful day!")
         exit()
     elif "what is" in message or "calculate" in message:
         expression = message.replace("what is", "").replace("calculate", "")
@@ -82,7 +77,7 @@ def chatbot_reply(message):
         query = message.replace("who is", "").replace("what is", "")
         search_wikipedia(query)
     else:
-        speak("Sorry, I don't understand that yet.")
+        speak("Sorry, I don't understand that.")
 
 # Main loop
 while True:
